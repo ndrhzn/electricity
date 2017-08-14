@@ -93,14 +93,14 @@ ggplot(df, aes(x = hour, y = consumption, group = month, color = month))+
   #           size = 5, inherit.aes = F)+
   scale_x_continuous(breaks = c(0, 10, 18, 24),
                      limits = c(0, 32), minor_breaks = NULL)+
-  scale_y_continuous(breaks = seq(12000, 22000, 2000), 
+  scale_y_continuous(breaks = seq(12000, 20000, 2000), 
                      labels = unit_format(unit = "", scale = 1e-3, digits = 1))+
   scale_color_manual(values = c('грудень' = '#8e0152', 'січень' = '#c51b7d', 'лютий' = '#de77ae',
                                 'березень' = '#8e0152', 'квітень' = '#c51b7d', 'травень' = '#de77ae',
                                 'липень' = '#8e0152', 'червень' = '#c51b7d', 'серпень' = '#de77ae',
                                 'листопад' = '#8e0152', 'жовтень' = '#c51b7d', 'вересень' = '#de77ae'))+
   facet_wrap(~season, ncol = 4)+
-  labs(title = 'Споживання електроенергії', 
+  labs(title = 'Споживання електроенергії впродовж дня', 
        subtitle = stringr::str_wrap('Лінії на графіку позначають середньомісячне споживання електроенергії (тисяч МВт) в Україні у 2016 році в розрізі годин доби та місяців', 115),
        caption = 'Дані: НЕК Укренерго, 2016 рік | Візуалізація: Textura.in.ua')+
   theme_minimal()+
