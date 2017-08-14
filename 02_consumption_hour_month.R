@@ -112,7 +112,7 @@ ggplot(df, aes(x = hour, y = consumption, group = month, color = month))+
         panel.grid.minor = element_blank(),
         strip.text = element_blank(),
         panel.spacing.x = unit(2, 'lines'),
-        plot.title = element_text(face = 'bold', size = 44, margin = margin(b = 10, t = 20)),
+        plot.title = element_text(face = 'bold', size = 44, margin = margin(b = 20, t = 10)),
         plot.subtitle = element_text(size = 19, face = 'plain', margin = margin(b = 20)),
         plot.caption = element_text(size = 16, margin = margin(b = 20, t = 40), color = '#5D646F'),
         plot.background = element_rect(fill = '#EFF2F4'),
