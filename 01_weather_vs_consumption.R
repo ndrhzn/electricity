@@ -1,51 +1,7 @@
-library(dplyr)
 library(ggplot2)
-library(lubridate)
 library(scales)
 library(stringr)
-
-parse_data <- function(year){
-  
-  if(year ==  2016) {
-    
-    url = 'http://data.gov.ua/sites/default/files/media//2782/11.08.2017/dg_year_2016_16.csv'
-    
-  } else if (year == 2017) {
-    
-    url = 'http://data.gov.ua/sites/default/files/media//2782/11.08.2017/dg_year_15.csv'
-    
-  }
-  
-  df <- read.csv(url, stringsAsFactors = F)[,c(1,8)]
-  names(df) <- c('datetime', 'consumption')
-  
-  df <- df %>% 
-    mutate(datetime = as.POSIXct(strptime(datetime, format = '%d.%m.%Y %H:%M:%S', tz = 'UTC+2')),
-           month = month(datetime, label = T, abbr = F),
-           day = mday(datetime),
-           yday = yday(datetime),
-           wday = wday(datetime, label = T, abbr = F),
-           wday = factor(wday, ordered = T, 
-                         levels = c('Monday', 'Tuesday', 'Wednesday', '
-                                    Thursday', 'Friday', 'Saturday', 'Sunday')),
-           hour = hour(datetime)) %>% 
-    filter(consumption != 0)
-  
-  df$season <- case_when(
-    
-    df$month %in% c('January', 'February', 'December') ~ 'winter',
-    df$month %in% c('March', 'April', 'May') ~ 'spring',
-    df$month %in% c('June', 'July', 'August') ~ 'summer',
-    df$month %in% c('September', 'October', 'November') ~ 'autumn'
-    
-  )
-  
-  df$season <- factor(df$season, ordered = T, 
-                      levels = c('winter', 'spring', 'summer', 'autumn'))
-  
-  return(df)
-  
-}
+source('00_parse_data.R')
 
 consumption <- parse_data(year = 2016)
 
@@ -87,7 +43,7 @@ ggplot(temp, aes(x = tavg, y = consumption))+
   scale_y_continuous(breaks = seq(300000, 500000, 50000), 
                      labels = unit_format(unit = "", scale = 1e-3, digits = 1))+
   labs(title = 'Погода та споживання електроенергії', 
-       subtitle = str_wrap('Кожна точка на графіку - один день у 2016 році. Позиція точки визначається середньою температурою в цей день (вісь Х, градуси Цельсія) та обсягом споживання електроенергії (вісь Y, тисячі МВт)', 110),
+       subtitle = str_wrap('Кожна точка на графіку — один день у 2016 році. Позиція точки визначається середньою температурою в цей день (вісь Х, градуси Цельсія) та обсягом споживання електроенергії (вісь Y, тисячі МВт)', 110),
        caption = 'Дані: НЕК Укренерго, 2016 рік | Візуалізація: Textura.in.ua')+
   theme_minimal()+
   theme(text = element_text(family = 'Ubuntu Condensed', face = 'plain', color = '#3A3F4A'),
