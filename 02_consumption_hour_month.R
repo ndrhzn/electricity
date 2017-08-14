@@ -101,7 +101,7 @@ ggplot(df, aes(x = hour, y = consumption, group = month, color = month))+
                                 'листопад' = '#8e0152', 'жовтень' = '#c51b7d', 'вересень' = '#de77ae'))+
   facet_wrap(~season, ncol = 4)+
   labs(title = 'Споживання електроенергії впродовж дня', 
-       subtitle = stringr::str_wrap('Лінії на графіку позначають середньомісячне споживання електроенергії (тисяч МВт) в Україні у 2016 році в розрізі годин доби та місяців', 115),
+       subtitle = stringr::str_wrap('Лінії на графіку позначають середньомісячний обсяг споживання електроенергії (тисяч МВт) в Україні у 2016 році в розрізі годин доби та місяців', 110),
        caption = 'Дані: НЕК Укренерго, 2016 рік | Візуалізація: Textura.in.ua')+
   theme_minimal()+
   theme(text = element_text(family = 'Ubuntu Condensed', face = 'plain', color = '#3A3F4A'),
