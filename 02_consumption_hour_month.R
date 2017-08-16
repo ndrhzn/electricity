@@ -79,20 +79,20 @@ months <- df %>%
 # )
 
 
-png('consumption_by_month&hour.png', width = 1000, height = 900)
+png('consumption_by_month&hour.png', width = 1000, height = 1000)
 
 ggplot(df, aes(x = hour, y = consumption, group = month, color = month))+
   geom_path(size = 1, alpha = 0.75)+
   geom_point(data = months, size = 3.5)+
   geom_text(data = months, 
-            aes(x = 24.5, label = month, family = 'Ubuntu Condensed'), size = 5, hjust = 0)+
+            aes(x = 24.5, label = month, family = 'Ubuntu Condensed'), size = 6, fontface = 'plain', hjust = 0)+
   # geom_label(data = annotations, 
   #           aes(x = hour, y = consumption, label = stringr::str_wrap(label, 20), 
   #               family = 'Ubuntu Condensed'), fill = '#EFF2F4',
   #           label.size = 0, label.padding = unit(0.05, 'lines'),
   #           size = 5, inherit.aes = F)+
   scale_x_continuous(breaks = c(0, 10, 18, 24),
-                     limits = c(0, 32), minor_breaks = NULL)+
+                     limits = c(0, 36), minor_breaks = NULL)+
   scale_y_continuous(breaks = seq(12000, 20000, 2000), 
                      labels = unit_format(unit = "", scale = 1e-3, digits = 1))+
   scale_color_manual(values = c('грудень' = '#8e0152', 'січень' = '#c51b7d', 'лютий' = '#de77ae',
@@ -101,7 +101,7 @@ ggplot(df, aes(x = hour, y = consumption, group = month, color = month))+
                                 'листопад' = '#8e0152', 'жовтень' = '#c51b7d', 'вересень' = '#de77ae'))+
   facet_wrap(~season, ncol = 4)+
   labs(title = 'Споживання електроенергії впродовж дня', 
-       subtitle = stringr::str_wrap('Лінії на графіку позначають середньомісячний обсяг споживання електроенергії (тисяч МВт) в Україні у 2016 році в розрізі годин доби та місяців', 110),
+       subtitle = stringr::str_wrap('Лінії на графіку позначають середньомісячний обсяг споживання електроенергії (ГВт-год) в Україні у 2016 році в розрізі годин доби та місяців', 110),
        caption = 'Дані: НЕК Укренерго, 2016 рік | Візуалізація: Textura.in.ua')+
   theme_minimal()+
   theme(text = element_text(family = 'Ubuntu Condensed', face = 'plain', color = '#3A3F4A'),
