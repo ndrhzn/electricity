@@ -79,7 +79,7 @@ months <- df %>%
 # )
 
 
-png('consumption_by_month&hour.png', width = 1000, height = 1000)
+png('consumption_by_month&hour.png', width = 1000, height = 900)
 
 ggplot(df, aes(x = hour, y = consumption, group = month, color = month))+
   geom_path(size = 1, alpha = 0.75)+
@@ -101,7 +101,7 @@ ggplot(df, aes(x = hour, y = consumption, group = month, color = month))+
                                 'листопад' = '#8e0152', 'жовтень' = '#c51b7d', 'вересень' = '#de77ae'))+
   facet_wrap(~season, ncol = 4)+
   labs(title = 'Споживання електроенергії впродовж дня', 
-       subtitle = stringr::str_wrap('Лінії на графіку позначають середньомісячний обсяг споживання електроенергії (ГВт⋅год) в Україні у 2016 році в розрізі годин доби та місяців', 110),
+       subtitle = stringr::str_wrap('Лінії на графіку позначають середньомісячний обсяг споживання електроенергії (ГВт) в Україні у 2016 році в розрізі годин доби та місяців', 110),
        caption = 'Дані: НЕК Укренерго, 2016 рік | Візуалізація: Textura.in.ua')+
   theme_minimal()+
   theme(text = element_text(family = 'Ubuntu Condensed', face = 'plain', color = '#3A3F4A'),
@@ -113,7 +113,7 @@ ggplot(df, aes(x = hour, y = consumption, group = month, color = month))+
         strip.text = element_blank(),
         panel.spacing.x = unit(2, 'lines'),
         plot.title = element_text(face = 'bold', size = 44, margin = margin(b = 20, t = 10)),
-        plot.subtitle = element_text(size = 19, face = 'plain', margin = margin(b = 20)),
+        plot.subtitle = element_text(size = 20, face = 'plain', margin = margin(b = 20)),
         plot.caption = element_text(size = 16, margin = margin(b = 20, t = 40), color = '#5D646F'),
         plot.background = element_rect(fill = '#EFF2F4'),
         plot.margin = unit(c(2, 2, 2, 2), 'cm'))
